@@ -1,3 +1,14 @@
+# node_modules
 node_modules
+
+# output folders
 dist
+
+# IDE configs
 .idea
+
+# Local cache
+*.DS_Store
+
+# logs
+*.log
