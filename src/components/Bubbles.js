@@ -1,5 +1,14 @@
 // core function
 function Bubbles (container, self, options) {
+  // TODO: customized configs
+  const config = {
+    header: {
+      title: 'Ask Jamie @ onePA',
+    },
+    input: {
+      placeholder: 'Type your question...',
+    },
+  };
   // options
   options = typeof options !== 'undefined' ? options : {}
   animationTime = options.animationTime || 200 // how long it takes to animate chat bubble, also set in CSS
@@ -8,16 +17,17 @@ function Bubbles (container, self, options) {
   sidePadding = options.sidePadding || 6 // padding on both sides of chat bubbles
   recallInteractions = options.recallInteractions || 0 // number of interactions to be remembered and brought back upon restart
   inputCallbackFn = options.inputCallbackFn || false // should we display an input field?
+  minimizeChatWindow = options.minimizeChatWindow || undefined;
 
-  var standingAnswer = 'ice' // remember where to restart convo if interrupted
+  const standingAnswer = 'ice' // remember where to restart convo if interrupted
 
-  var _convo = {} // local memory for conversation JSON object
+  let _convo = {} // local memory for conversation JSON object
   //--> NOTE that this object is only assigned once, per session and does not change for this
   // 		constructor name during open session.
 
   // local storage for recalling conversations upon restart
-  var localStorageCheck = function () {
-    var test = 'chat-bubble-storage-test'
+  const localStorageCheck = function () {
+    const test = 'chat-bubble-storage-test'
     try {
       localStorage.setItem(test, test)
       localStorage.removeItem(test)
@@ -29,16 +39,16 @@ function Bubbles (container, self, options) {
       return false
     }
   }
-  var localStorageAvailable = localStorageCheck() && recallInteractions > 0
-  var interactionsLS = 'chat-bubble-interactions'
-  var interactionsHistory =
+  const localStorageAvailable = localStorageCheck() && recallInteractions > 0
+  const interactionsLS = 'chat-bubble-interactions'
+  const interactionsHistory =
     (localStorageAvailable &&
       JSON.parse(localStorage.getItem(interactionsLS))) ||
-    []
+    [];
 
   // prepare next save point
   interactionsSave = function (say, reply) {
-    if (!localStorageAvailable) return
+    if (!localStorageAvailable) return;
     // limit number of saves
     if (interactionsHistory.length > recallInteractions)
       interactionsHistory.shift() // removes the oldest (first) save to make space
@@ -53,43 +63,51 @@ function Bubbles (container, self, options) {
       reply !== 'reply reply-pick'
     )
     // ...it shan't be memorized
-      return
+      return;
 
     // save to memory
-    interactionsHistory.push({ say: say, reply: reply })
+    interactionsHistory.push({ say: say, reply: reply });
   }
 
   // commit save to localStorage
   interactionsSaveCommit = function () {
-    if (!localStorageAvailable) return
-    localStorage.setItem(interactionsLS, JSON.stringify(interactionsHistory))
+    if (!localStorageAvailable) return;
+    localStorage.setItem(interactionsLS, JSON.stringify(interactionsHistory));
   }
 
   // set up the stage
   container.classList.add('bubble-container');
-  var bubbleWrap = document.createElement('div');
+  const bubbleWrap = document.createElement('div');
   bubbleWrap.className = 'bubble-wrap';
 
   const chatHeader = document.createElement('div');
   chatHeader.className = 'chat-header';
-  chatHeader.innerHTML = 'Ask Jamie';
-  container.appendChild(chatHeader)
+  chatHeader.innerHTML = `<h4>${config.header.title}</h4>`;
+
+  if (minimizeChatWindow) {
+    const minimizeButton = document.createElement('a');
+    minimizeButton.className = 'minimize-button';
+    minimizeButton.innerHTML = 'x';
+    minimizeButton.addEventListener('click', minimizeChatWindow);
+    chatHeader.appendChild(minimizeButton);
+  }
+
+  container.appendChild(chatHeader);
   container.appendChild(bubbleWrap);
 
   // install user input textfield
   this.typeInput = function (callbackFn) {
-    var inputWrap = document.createElement('div')
-    inputWrap.className = 'input-wrap'
-    var inputText = document.createElement('textarea')
-    // TODO: to be converted to variable
-    inputText.setAttribute('placeholder', 'Ask me anything...')
-    inputWrap.appendChild(inputText)
+    const inputWrap = document.createElement('div');
+    inputWrap.className = 'input-wrap';
+    const inputText = document.createElement('textarea');
+    inputText.setAttribute('placeholder', config.input.placeholder);
+    inputWrap.appendChild(inputText);
     inputText.addEventListener('keypress', function (e) {
       // register user input
       if (e.keyCode == 13) {
         e.preventDefault()
         typeof bubbleQueue !== false ? clearTimeout(bubbleQueue) : false // allow user to interrupt the bot
-        var lastBubble = document.querySelectorAll('.bubble.say')
+        let lastBubble = document.querySelectorAll('.bubble.say')
         lastBubble = lastBubble[lastBubble.length - 1]
         lastBubble.classList.contains('reply') &&
         !lastBubble.classList.contains('reply-freeform')
@@ -118,10 +136,10 @@ function Bubbles (container, self, options) {
   inputCallbackFn ? this.typeInput(inputCallbackFn) : false
 
   // init typing bubble
-  var bubbleTyping = document.createElement('div')
+  const bubbleTyping = document.createElement('div')
   bubbleTyping.className = 'bubble-typing imagine'
-  for (dots = 0; dots < 3; dots++) {
-    var dot = document.createElement('div')
+  for (let dots = 0; dots < 3; dots++) {
+    const dot = document.createElement('div')
     dot.className = 'dot_' + dots + ' dot'
     bubbleTyping.appendChild(dot)
   }
@@ -136,7 +154,7 @@ function Bubbles (container, self, options) {
     here ? (standingAnswer = here) : false
   }
 
-  var iceBreaker = false // this variable holds answer to whether this is the initative bot interaction or not
+  let iceBreaker = false // this variable holds answer to whether this is the initative bot interaction or not
   this.reply = function (turn) {
     iceBreaker = typeof turn === 'undefined'
     turn = !iceBreaker ? turn : _convo.ice
@@ -144,7 +162,7 @@ function Bubbles (container, self, options) {
     if (!turn) return
     if (turn.reply !== undefined) {
       turn.reply.reverse()
-      for (var i = 0; i < turn.reply.length; i++) {
+      for (let i = 0; i < turn.reply.length; i++) {
         (function (el, count) {
           questionsHTML +=
             '<span class="bubble-button" style="animation-delay: ' +
@@ -170,7 +188,7 @@ function Bubbles (container, self, options) {
   }
   // navigate "answers"
   this.answer = function (key, content) {
-    var func = function (key) {
+    const func = function (key) {
       typeof window[key] === 'function' ? window[key]() : false
     }
     _convo[key] !== undefined
@@ -195,15 +213,15 @@ function Bubbles (container, self, options) {
   }
 
   // "type" each message within the group
-  var orderBubbles = function (q, callback) {
-    var start = function () {
+  const orderBubbles = function (q, callback) {
+    let start = function () {
       setTimeout(function () {
         callback()
       }, animationTime)
     }
-    var position = 0
+    const position = 0
     for (
-      var nextCallback = position + q.length - 1;
+      let nextCallback = position + q.length - 1;
       nextCallback >= position;
       nextCallback--
     ) {
@@ -217,15 +235,15 @@ function Bubbles (container, self, options) {
   }
 
   // create a bubble
-  var bubbleQueue = false
-  var addBubble = function (say, posted, reply, live) {
+  let bubbleQueue = false
+  const addBubble = function (say, posted, reply, live) {
     reply = typeof reply !== 'undefined' ? reply : ''
     live = typeof live !== 'undefined' ? live : true // bubbles that are not "live" are not animated and displayed differently
-    var animationTime = live ? this.animationTime : 0
-    var typeSpeed = live ? this.typeSpeed : 0
+    const animationTime = live ? this.animationTime : 0
+    const typeSpeed = live ? this.typeSpeed : 0
     // create bubble element
-    var bubble = document.createElement('div')
-    var bubbleContent = document.createElement('span')
+    const bubble = document.createElement('div')
+    const bubbleContent = document.createElement('span')
     bubble.className = 'bubble imagine ' + (!live ? ' history ' : '') + reply
     bubbleContent.className = 'bubble-content'
     bubbleContent.innerHTML = say
@@ -233,15 +251,15 @@ function Bubbles (container, self, options) {
     bubbleWrap.insertBefore(bubble, bubbleTyping)
     // answer picker styles
     if (reply !== '') {
-      var bubbleButtons = bubbleContent.querySelectorAll('.bubble-button')
-      for (var z = 0; z < bubbleButtons.length; z++) {
+      const bubbleButtons = bubbleContent.querySelectorAll('.bubble-button')
+      for (let z = 0; z < bubbleButtons.length; z++) {
         ;(function (el) {
           if (!el.parentNode.parentNode.classList.contains('reply-freeform'))
             el.style.width = el.offsetWidth - sidePadding * 2 + widerBy + 'px'
         })(bubbleButtons[z])
       }
       bubble.addEventListener('click', function () {
-        for (var i = 0; i < bubbleButtons.length; i++) {
+        for (let i = 0; i < bubbleButtons.length; i++) {
           ;(function (el) {
             el.style.width = 0 + 'px'
             el.classList.contains('bubble-pick') ? (el.style.width = '') : false
@@ -266,7 +284,7 @@ function Bubbles (container, self, options) {
     }, wait - animationTime * 2)
     bubbleQueue = setTimeout(function () {
       bubble.classList.remove('imagine')
-      var bubbleWidthCalc = bubbleContent.offsetWidth + widerBy + 'px'
+      const bubbleWidthCalc = bubbleContent.offsetWidth + widerBy + 'px'
       bubble.style.width = reply == '' ? bubbleWidthCalc : ''
       bubble.style.width = say.includes('<img src=')
         ? '50%'
@@ -282,8 +300,8 @@ function Bubbles (container, self, options) {
       containerHeight = container.offsetHeight
       scrollDifference = bubbleWrap.scrollHeight - bubbleWrap.scrollTop
       scrollHop = scrollDifference / 200
-      var scrollBubbles = function () {
-        for (var i = 1; i <= scrollDifference / scrollHop; i++) {
+      const scrollBubbles = function () {
+        for (let i = 1; i <= scrollDifference / scrollHop; i++) {
           ;(function () {
             setTimeout(function () {
               bubbleWrap.scrollHeight - bubbleWrap.scrollTop > containerHeight
@@ -298,7 +316,7 @@ function Bubbles (container, self, options) {
   }
 
   // recall previous interactions
-  for (var i = 0; i < interactionsHistory.length; i++) {
+  for (let i = 0; i < interactionsHistory.length; i++) {
     addBubble(
       interactionsHistory[i].say,
       function () {},
@@ -311,11 +329,11 @@ function Bubbles (container, self, options) {
 // below functions are specifically for WebPack-type project that work with import()
 
 // this function automatically adds all HTML and CSS necessary for chat-bubble to function
-function prepHTML (options) {
+function prepHTML(options) {
   // options
-  var options = typeof options !== 'undefined' ? options : {}
-  var container = options.container || 'chat' // id of the container HTML element
-  var relative_path = options.relative_path || './node_modules/chat-bubble/'
+  options = typeof options !== 'undefined' ? options : {}
+  const container = options.container || 'chat' // id of the container HTML element
+  const relative_path = options.relative_path || './node_modules/chat-bubble/'
 
   // make HTML container element
   window[container] = document.createElement('div')
@@ -323,8 +341,8 @@ function prepHTML (options) {
   document.body.appendChild(window[container])
 
   // style everything
-  var appendCSS = function (file) {
-    var link = document.createElement('link')
+  const appendCSS = function (file) {
+    const link = document.createElement('link')
     link.href = file
     link.type = 'text/css'
     link.rel = 'stylesheet'

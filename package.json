@@ -24,7 +24,7 @@
     "serve": "webpack --hot",
     "watch": "webpack --watch",
     "test": "cypress open",
-    "lint": "tslint --project ."
+    "lint": "tslint -c tslint.json 'src/**/*.ts'"
   },
   "devDependencies": {
     "css-loader": "^3.2.0",

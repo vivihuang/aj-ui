@@ -23,7 +23,21 @@
 .chat-header {
   background-color: $primary;
   color: $white;
-  padding: 8px;
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  h4 {
+    margin: 0;
+  }
+  .minimize-button {
+    display: block;
+    padding: 0 8px;
+    line-height: 16px;
+    cursor: pointer;
+    &:hover {
+      opacity: .8;
+    }
+  }
 }
 
 /* style bubbles */

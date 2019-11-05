@@ -16,7 +16,7 @@ const ajContainer = createDom('div', { class: 'rasa-chat-container' });
 const bubbleContainer = createDom('div', { id: 'chat' });
 const chatButton = createDom('button', { class: 'chat-button', text: config.chat.buttonText })
 chatButton.addEventListener('click', () => {
-  bubbleContainer.classList.toggle('active')
+  bubbleContainer.classList.toggle('active');
 });
 chatButton.addEventListener('click', () => {
   chatWindow.talk(convo)
@@ -27,16 +27,19 @@ ajContainer.appendChild(bubbleContainer);
 document.body.appendChild(ajContainer);
 
 const chatWindow = new Bubbles(bubbleContainer, 'chatWindow', {
+  minimizeChatWindow: () => {
+    bubbleContainer.classList.remove('active');
+  },
   inputCallbackFn (o: any) {
     console.log('send', o)
     chatWindow.think();
     const xhr = new XMLHttpRequest();
     xhr.open('POST', `${config.engine.host}${config.engine.endpoint}`, true);
     xhr.setRequestHeader('content-type', 'application/json')
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState == 4) {
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState === 4) {
         if (xhr.getResponseHeader('content-type') === 'application/json') {
-          var result = JSON.parse(xhr.responseText)
+          const result = JSON.parse(xhr.responseText)
           console.log('result', result)
           chatWindow.reply({
             says: result.map((item: any) => {
