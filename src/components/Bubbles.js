@@ -66,16 +66,22 @@ function Bubbles (container, self, options) {
   }
 
   // set up the stage
-  container.classList.add('bubble-container')
-  var bubbleWrap = document.createElement('div')
-  bubbleWrap.className = 'bubble-wrap'
-  container.appendChild(bubbleWrap)
+  container.classList.add('bubble-container');
+  var bubbleWrap = document.createElement('div');
+  bubbleWrap.className = 'bubble-wrap';
+
+  const chatHeader = document.createElement('div');
+  chatHeader.className = 'chat-header';
+  chatHeader.innerHTML = 'Ask Jamie';
+  container.appendChild(chatHeader)
+  container.appendChild(bubbleWrap);
 
   // install user input textfield
   this.typeInput = function (callbackFn) {
     var inputWrap = document.createElement('div')
     inputWrap.className = 'input-wrap'
     var inputText = document.createElement('textarea')
+    // TODO: to be converted to variable
     inputText.setAttribute('placeholder', 'Ask me anything...')
     inputWrap.appendChild(inputText)
     inputText.addEventListener('keypress', function (e) {

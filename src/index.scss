@@ -1,2 +1,6 @@
-@import "bubble";
-@import "rasa-chat";
+// import theme
+@import "./theme/variables-pa";
+
+// styles
+@import "./styles/bubble";
+@import "./styles/rasa-chat";
