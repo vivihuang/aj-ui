@@ -27,4 +27,7 @@ module.exports = {
       inject: false,
     }),
   ],
-}
+  devServer: {
+    port: 3000,
+  },
+};

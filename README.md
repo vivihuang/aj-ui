@@ -1,6 +1,6 @@
-# Rasa Chatbot bubble
+# 🇺🇦 Ukraine: The Chatbot UI
 
-## Usage
+The chatbot UI is supposed to be imported as bundled JavaScript file, and automatically generate the DOM.
 
 ```html
 <script type="text/javascript">
@@ -10,16 +10,41 @@
 </script>
 ```
 
+If you need to develop locally, please follow the instructions below.
+
+## Local env setup
+
+```bash
+# One time setup
+npm install
+
+# developing, running at localhost:3000
+npm start
+
+# build, then open dist/index.html
+npm run build
+
+# lint
+npm run lint
+```
+
+### Prerequisite
+
+```
+node >= 12.0.0
+npm >= 6.0
+```
+
 ## Example
 
-Reference `./examples/index.html`
+Please refer to `./examples/index.html`.
+
 
 ## Jamie S3 Proxy
 
 ### Prerequisite
 
 * Docker
-* That's all
 
 ## How to run locally
 
@@ -29,7 +54,7 @@ Reference `./examples/index.html`
 docker build -t jamie-s3-proxy .
 
 # run the container
-docker run -p 80:80 -t jamie-s3-proxy
+docker run -p 3000:3000 -t jamie-s3-proxy
 ```
 
 Visit [http://localhost/index.html](http://localhost/index.html);
