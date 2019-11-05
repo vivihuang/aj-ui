@@ -2,6 +2,7 @@ $primary: #FB761E;
 $text: #48413F;
 $white: #FFFFFF;
 $light: #cccccc;
+$font-family: 'Roboto','Segoe UI',Helvetica, Helvetica Neue, Arial, Hiragino Sans GB, Segoe UI, sans-serif;
 
 // chat window
 $background: #FDFDFD;
@@ -12,6 +13,7 @@ $text-user: #FDFDFD;
 $text-placeholder: #AAA7A4;
 $input-bg: #FFFFFF;
 $input-text: $text;
+$input-placeholder: rgba(255, 255, 255, .5);
 $button-bg: $primary;
 $button-text: #FFFFFF;
 

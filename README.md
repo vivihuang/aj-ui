@@ -55,6 +55,8 @@ docker build -t jamie-s3-proxy .
 
 # run the container
 docker run -p 3000:3000 -t jamie-s3-proxy
+# run in background
+docker run -d -p 3000:3000 -t jamie-s3-proxy
 ```
 
 Visit [http://localhost/index.html](http://localhost/index.html);

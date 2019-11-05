@@ -194,6 +194,7 @@
 .bubble .bubble-content input {
   border: 0;
   outline: 0;
+  color: $text;
   background: linear-gradient(193deg, #1faced, #5592dc 100%) !important;
   box-shadow: 0 0 1px 0 #000, 0 -1px 0 0px rgba(255, 255, 255, 0.38) inset;
   text-shadow: 0 1px rgba(0, 0, 0, 0.35);
@@ -201,13 +202,13 @@
 
 .bubble .bubble-content input::-webkit-input-placeholder {
   /* Chrome/Opera/Safari */
-  color: rgba(255, 255, 255, .5);
+  color: $input-placeholder;
   text-shadow: none;
 }
 
 .bubble .bubble-content input::-moz-placeholder {
   /* Firefox 19+ */
-  color: rgba(255, 255, 255, .5);
+  color: $input-placeholder;
   text-shadow: none;
 }
 
@@ -260,7 +261,7 @@
 
 /* style user input field */
 .bubble-container .input-wrap {
-  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  font-family: $font-family;
   position: absolute;
   right: 0;
   bottom: 0;
@@ -269,7 +270,7 @@
 }
 
 .bubble-container .input-wrap textarea {
-  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  font-family: $font-family;
   font-size: 1em;
   font-weight: 400;
   line-height: 1.25em;
@@ -277,7 +278,7 @@
   margin: 10px;
   padding: 10px 15px;
   letter-spacing: .5px;
-  color: #2c2c2c;
+  color: $text;
   border: none;
   border-radius: 15px;
   outline: none;

@@ -1,5 +1,5 @@
 .rasa-chat-container {
-  font-family: 'Roboto','Segoe UI',Helvetica, Helvetica Neue, Arial, Hiragino Sans GB, Segoe UI, sans-serif;
+  font-family: $font-family;
   box-sizing: border-box;
 }
 
@@ -48,7 +48,7 @@
 }
 
 .input-wrap {
-  opacity: 0.4;
+  // opacity: 0.4;
   textarea {
     box-sizing: border-box;
     resize: none;
