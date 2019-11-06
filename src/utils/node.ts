@@ -1,8 +1,8 @@
 interface CreateDomOptions {
-  id: string
-  class: string[] | string
-  html: string
-  text: string
+  id: string;
+  class: string[] | string;
+  html: string;
+  text: string;
 }
 
 export function createDom<K extends keyof HTMLElementTagNameMap>(tagName: K, options: Partial<CreateDomOptions> = {}): HTMLElementTagNameMap[K] {
@@ -23,4 +23,4 @@ export function createDom<K extends keyof HTMLElementTagNameMap>(tagName: K, opt
     el.innerText = options.text;
   }
   return el;
-};
+}

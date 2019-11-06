@@ -4,11 +4,21 @@ import { Bubbles } from './components/Bubbles'
 import { createDom } from './utils/node'
 import config from './config';
 
-declare global {
-  interface Window {
-    chatWindow: any
-  }
+interface Convo {
+  [key: string]: {
+    says?: string[];
+    reply?: {
+      question: string;
+      answer: string;
+    }[];
+  };
 }
+
+const convo: Convo = {
+  ice: {
+    says: config.chat.defaultGreetings,
+  },
+};
 
 const uuid = +new Date();
 
@@ -18,13 +28,6 @@ const chatButton = createDom('button', { class: 'chat-button', text: config.chat
 chatButton.addEventListener('click', () => {
   bubbleContainer.classList.toggle('active');
 });
-chatButton.addEventListener('click', () => {
-  chatWindow.talk(convo)
-}, { once: true })
-
-ajContainer.appendChild(chatButton);
-ajContainer.appendChild(bubbleContainer);
-document.body.appendChild(ajContainer);
 
 const chatWindow = new Bubbles(bubbleContainer, 'chatWindow', {
   minimizeChatWindow: () => {
@@ -59,20 +62,18 @@ const chatWindow = new Bubbles(bubbleContainer, 'chatWindow', {
   },
 });
 
-interface Convo {
-  [key: string]: {
-    says?: string[]
-    reply?: {
-      question: string
-      answer: string
-    }[]
+chatButton.addEventListener('click', () => {
+  chatWindow.talk(convo)
+}, { once: true })
+
+ajContainer.appendChild(chatButton);
+ajContainer.appendChild(bubbleContainer);
+document.body.appendChild(ajContainer);
+
+declare global {
+  interface Window {
+    chatWindow: any;
   }
 }
-
-const convo: Convo = {
-  ice: {
-    says: config.chat.defaultGreetings,
-  },
-};
 
 window.chatWindow = chatWindow;
