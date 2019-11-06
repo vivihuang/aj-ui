@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     // "incremental": true,                   /* Enable incremental compilation */
-    "target": "es3",
+    "target": "es5",
     "module": "commonjs",
     "lib": [
       "es2015",
@@ -9,7 +9,7 @@
     ],
     "allowJs": true,
     //    "checkJs": true,
-    // "jsx": "preserve",                     /* Specify JSX code generation: 'preserve', 'react-native', or 'react'. */
+     "jsx": "react-native",                     /* Specify JSX code generation: 'preserve', 'react-native', or 'react'. */
     // "declaration": true,                   /* Generates corresponding '.d.ts' file. */
     // "declarationMap": true,                /* Generates a sourcemap for each corresponding '.d.ts' file. */
     // "sourceMap": true,                     /* Generates corresponding '.map' file. */

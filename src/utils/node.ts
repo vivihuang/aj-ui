@@ -5,7 +5,7 @@ interface CreateDomOptions {
   text: string;
 }
 
-export function createDom<K extends keyof HTMLElementTagNameMap>(tagName: K, options: Partial<CreateDomOptions> = {}): HTMLElementTagNameMap[K] {
+export function createElement<K extends keyof HTMLElementTagNameMap>(tagName: K, options: Partial<CreateDomOptions> = {}): HTMLElementTagNameMap[K] {
   const el = document.createElement(tagName);
   if (options.id) {
     el.id = options.id;
