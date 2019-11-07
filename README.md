@@ -81,5 +81,5 @@ docker rmi $(docker images -q -f dangling=true)
 
 ## Commit with co-author
 ```bash
-git coc -m '[# card_no] message' --co 4g
+git cc -m '[# card_no] message' --co 4g
 ```

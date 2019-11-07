@@ -1,18 +1,19 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-  entry: './src/index.ts',
+  entry: './src/index.tsx',
   output: {
     filename: 'rasa-chatbot.js',
   },
   mode: 'development',
   resolve: {
-    extensions: ['.ts', '.js', '.scss'],
+    extensions: ['.ts','.tsx', '.js', '.scss'],
   },
   module: {
     rules: [
       {
-        test: /\.ts$/,
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
         use: 'ts-loader',
       },
       {
