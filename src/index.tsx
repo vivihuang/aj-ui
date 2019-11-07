@@ -50,7 +50,7 @@ const chatWindow = new Bubbles(bubbleContainer, 'chatWindow', {
           const result = JSON.parse(xhr.responseText);
           console.log('result', result);
           chatWindow.reply({
-            says: result.map((item: any) => {
+            says: result.map((item: MessageResponse) => {
               if (item.image) return `<img src="${item.image}">`;
               return item.text;
             }),
