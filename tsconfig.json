@@ -40,11 +40,12 @@
     // "noFallthroughCasesInSwitch": true,    /* Report errors for fallthrough cases in switch statement. */
 
     // "moduleResolution": "classic",
-    // "baseUrl": "./",
+    //     "baseUrl": "./",
     // "paths": {},                           /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
     // "rootDirs": [],                        /* List of root folders whose combined content represents the structure of the project at runtime. */
     // "typeRoots": [],                       /* List of folders to include type definitions from. */
-    // "types": [],                           /* Type declaration files to be included in compilation. */
+    // "types": [],
+    /* Type declaration files to be included in compilation. */
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true
     // "preserveSymlinks": true,              /* Do not resolve the real path of symlinks. */
@@ -64,7 +65,6 @@
     "src/**/*"
   ],
   "exclude": [
-    "node_modules",
-    "**/*.spec.ts"
+    "node_modules"
   ]
 }
