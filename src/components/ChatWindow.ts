@@ -10,6 +10,7 @@ const ChatWindow = () => {
 
   const chatHeader = ChatHeader({
     text: config.chat.headerText,
+    avatarSrc: config.chat.avatar,
     closable: true,
     close: () => {
       wrapper.classList.remove('active');
