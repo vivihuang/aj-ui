@@ -1,7 +1,7 @@
 const CONFIG = {
   chat: {
     buttonText: 'Ask Jamie',
-    headerText: 'Ask Jamie',
+    headerText: 'Ask Jamie @ onePA',
     defaultGreetings: ['Hi, good day! How may I help you?'],
   },
   engine: {

@@ -1,6 +1,8 @@
 import './index.scss'
 
-import ChatWindow from './components/ChatWindow'
+import config from './config';
+import ChatWindow from './components/ChatWindow';
+import Switcher from './components/Switcher';
 
 // interface Convo {
 //   [key: string]: {
@@ -69,4 +71,12 @@ import ChatWindow from './components/ChatWindow'
 // document.body.appendChild(ajContainer);
 
 const anotherChatWindow = ChatWindow();
+const switcher = Switcher({
+  text: config.chat.buttonText,
+  onClick: () => {
+    anotherChatWindow.classList.toggle('active');
+  },
+});
+
 document.body.appendChild(anotherChatWindow);
+document.body.appendChild(switcher);
