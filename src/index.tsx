@@ -1,5 +1,3 @@
-import { h, render } from "preact";
-
 import './index.scss';
 
 import config from './config';
@@ -7,8 +5,6 @@ import ChatWindow from './components/ChatWindow';
 import Switcher from './components/Switcher';
 import { createElement } from "./utils/node";
 import { Bubbles } from './components/Bubbles';
-
-render(<div>h1</div>, document.querySelector('body'));
 
 interface Convo {
   [key: string]: {
