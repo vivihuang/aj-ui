@@ -8,6 +8,9 @@ dist
 .idea
 *.iml
 
+### VS Code ###
+.vscode/
+
 # Local cache
 *.DS_Store
 
