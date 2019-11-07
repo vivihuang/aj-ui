@@ -11,7 +11,7 @@ function Bubbles (container, self, options) {
   };
   // options
   options = typeof options !== 'undefined' ? options : {}
-  animationTime = options.animationTime || 200 // how long it takes to animate chat bubble, also set in CSS
+  animationTime = options.animationTime || 50 // how long it takes to animate chat bubble, also set in CSS
   typeSpeed = options.typeSpeed || 5 // delay per character, to simulate the machine "typing"
   widerBy = options.widerBy || 2 // add a little extra width to bubbles to make sure they don't break
   sidePadding = options.sidePadding || 6 // padding on both sides of chat bubbles
@@ -77,6 +77,7 @@ function Bubbles (container, self, options) {
 
   // set up the stage
   container.classList.add('bubble-container');
+  container.classList.add('float-left');
   const bubbleWrap = document.createElement('div');
   bubbleWrap.className = 'bubble-wrap';
 
@@ -107,7 +108,7 @@ function Bubbles (container, self, options) {
       if (e.keyCode == 13) {
         e.preventDefault()
         typeof bubbleQueue !== false ? clearTimeout(bubbleQueue) : false // allow user to interrupt the bot
-        let lastBubble = document.querySelectorAll('.bubble.say')
+        let lastBubble = document.querySelectorAll('.bubble.say');
         lastBubble = lastBubble[lastBubble.length - 1]
         lastBubble.classList.contains('reply') &&
         !lastBubble.classList.contains('reply-freeform')

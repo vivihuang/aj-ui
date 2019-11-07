@@ -3,6 +3,11 @@
   box-sizing: border-box;
 }
 
+.float-left {
+  left: 10px !important;
+  right: unset;
+}
+
 .chat-button {
   position: fixed;
   right: -1px;

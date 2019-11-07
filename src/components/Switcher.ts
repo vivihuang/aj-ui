@@ -11,6 +11,6 @@ const Switcher = (options: SwitcherOptions) => {
   button.innerText = text;
   button.addEventListener('click', onClick);
   return button;
-}
+};
 
 export default Switcher;
