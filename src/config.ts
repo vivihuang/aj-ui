@@ -1,4 +1,4 @@
-const CONFIG = {
+const CONFIG: ChatbotConfig = {
   chat: {
     buttonText: 'Ask Jamie',
     headerText: 'Ask Jamie @ onePA',

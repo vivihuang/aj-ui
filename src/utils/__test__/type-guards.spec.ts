@@ -1,4 +1,4 @@
-import { isMessageInput } from "../type-guards";
+import { isMessageInput } from '../type-guards';
 
 describe('# Message Type Guards', () => {
   it('should tell me a message is a user input message', () => {

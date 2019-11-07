@@ -1,12 +1,13 @@
 import './index.scss';
 
-import config from './config';
-import ChatWindow from './components/ChatWindow';
-import Switcher from './components/Switcher';
-import { createElement } from "./utils/node";
-import { Bubbles } from './components/Bubbles';
+import { render, h } from 'preact';
 
-interface Convo {
+import config from './config';
+import { createElement } from './utils/node';
+import { Bubbles } from './components/Bubbles';
+import Chatbot from './Chatbot';
+
+interface MessageStore {
   [key: string]: {
     says?: string[];
     reply?: {
@@ -16,7 +17,7 @@ interface Convo {
   };
 }
 
-const convo: Convo = {
+const messageStore: MessageStore = {
   ice: {
     says: config.chat.defaultGreetings,
   },
@@ -51,7 +52,7 @@ const chatWindow = new Bubbles(bubbleContainer, 'chatWindow', {
           console.log('result', result);
           chatWindow.reply({
             says: result.map((item: MessageResponse) => {
-              if (item.image) return `<img src="${item.image}">`;
+              if (item.image) return `<img src="${item.image}" alt="test">`;
               return item.text;
             }),
           });
@@ -67,19 +68,10 @@ const chatWindow = new Bubbles(bubbleContainer, 'chatWindow', {
   },
 });
 
-chatWindow.talk(convo);
+chatWindow.talk(messageStore);
 
 ajContainer.appendChild(chatButton);
 ajContainer.appendChild(bubbleContainer);
 document.body.appendChild(ajContainer);
 
-const anotherChatWindow = ChatWindow();
-const switcher = Switcher({
-  text: config.chat.buttonText,
-  onClick: () => {
-    anotherChatWindow.classList.toggle('active');
-  },
-});
-
-document.body.appendChild(anotherChatWindow);
-document.body.appendChild(switcher);
+render(<Chatbot config={config} />, document.getElementById('ask-jamie') as Element);
