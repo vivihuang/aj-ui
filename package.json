@@ -1,14 +1,9 @@
 {
-  "name": "rasa-chat-bubble",
+  "name": "aj-ukraine",
   "version": "0.1.0",
   "description": "Simple chatbot UI for Rasa.",
-  "main": "component/Bubble.js",
-  "author": "mutoe <mutoe@foxmail.com>",
+  "main": "src/index.tsx",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mutoe/rasa-chat-bubble.git"
-  },
   "keywords": [
     "chatbot",
     "chat",
@@ -27,7 +22,10 @@
     "test:coverage": "jest --coverage",
     "test:e2e": "cypress open",
     "lint": "eslint 'src/**/*.ts'",
-    "lint:fix": "eslint 'src/**/*.(ts|tsx)' --fix"
+    "lint:fix": "eslint 'src/**/*.ts' --fix"
+  },
+  "dependencies": {
+    "preact": "^10.0.4"
   },
   "devDependencies": {
     "@types/jest": "^24.0.22",
@@ -44,12 +42,9 @@
     "style-loader": "^1.0.0",
     "ts-jest": "^24.1.0",
     "ts-loader": "^6.2.1",
-    "typescript": "^3.6.4",
+    "typescript": "^3.7.2",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^3.9.0"
-  },
-  "dependencies": {
-    "preact": "^10.0.4"
   }
 }
