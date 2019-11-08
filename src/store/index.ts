@@ -1,4 +1,5 @@
 import { useReducer } from 'preact/hooks';
+import { reducer } from './reducer';
 
 const initState: State = {
   conversation: [
@@ -11,14 +12,6 @@ const initState: State = {
       text: 'Hi, I am Jamie',
     },
   ],
-};
-
-
-const reducer = (state: State, action: StateAction) => {
-  switch (action) {
-    default:
-      throw new Error('Unexpected action');
-  }
 };
 
 const [state, dispatch] = useReducer(reducer, initState);
