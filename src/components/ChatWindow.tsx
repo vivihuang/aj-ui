@@ -3,20 +3,30 @@ import { h } from 'preact';
 import ChatHeader from './ChatHeader'
 import Conversation from './Conversation'
 import Input from './Input';
-import { state } from '../store';
+import { initState } from '../store';
+import { useReducer } from 'preact/hooks';
+import { reducer } from '../store/reducer';
 
-const ChatWindow = ({ config }: { config: ChatbotConfig }) => {
+interface ChatWindowProps {
+  config: ChatbotConfig;
+  showWindow: boolean;
+  setShowWindow: (show: boolean) => void;
+}
+
+const ChatWindow = ({ config, showWindow, setShowWindow }: ChatWindowProps) => {
   const { chat } = config;
-  return (<div className='bubble-container active'>
+  const [{ conversation }] = useReducer(reducer, initState);
+
+  return (<div className={`bubble-container ${showWindow ? 'active' : 'inactive'}`}>
     <ChatHeader
       text={chat.headerText}
       avatarSrc={chat.avatar}
       closable={true}
       close={() => {
-        console.log('test')
+        setShowWindow(false);
       }}
     />
-    <Conversation conversation={state.conversation} />
+    <Conversation conversation={conversation} />
     <Input />
   </div>)
 };

@@ -1,7 +1,4 @@
-import { useReducer } from 'preact/hooks';
-import { reducer } from './reducer';
-
-const initState: State = {
+export const initState: State = {
   conversation: [
     {
       sender: 'test1',
@@ -12,11 +9,4 @@ const initState: State = {
       text: 'Hi, I am Jamie',
     },
   ],
-};
-
-const [state, dispatch] = useReducer(reducer, initState);
-
-export {
-  state,
-  dispatch,
 };
