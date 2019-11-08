@@ -1,20 +1,33 @@
-// import { createElement } from '../utils/node';
-import { h } from 'preact';
+import { Component, h } from 'preact';
 
-// const Input = () => {
-//   const wrapper =  createElement('div', {
-//     class: 'input-wrap'
-//   })
-//   const textarea = createElement('textarea')
-//   wrapper.appendChild(textarea)
-//   return wrapper
-// }
+interface InputState {
+  value: string;
+}
 
-const Input = () => {
-  return (<div className='input-wrap'>
-      <textarea />
+class Input extends Component<any, InputState> {
+  state = { value: 'initial value' };
+
+  onInput = (event: any) => {
+    this.setState({
+      value: event.target.value,
+    });
+  };
+
+  onKeyUp = (event: KeyboardEvent) => {
+    if (event.code === 'Enter' || event.keyCode === 13) {
+      this.setState({
+        value: '',
+      })
+    }
+  };
+
+  render(_: any, { value }: InputState) {
+    return (<div className='input-wrap'>
+      <textarea value={value} onInput={this.onInput} onKeyUp={this.onKeyUp} />
     </div>)
-};
+
+  }
+}
 
 export default Input;
 
