@@ -1,4 +1,5 @@
 interface State {
+
   conversation: Message[];
 }
 

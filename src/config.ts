@@ -7,8 +7,8 @@ const CONFIG: ChatbotConfig = {
     avatar: 'http://placekitten.com/g/120/120 ',
   },
   engine: {
-    host: 'http://localhost:5005',
-    endpoint: '/webhooks/rest/webhook',
+    host: '',
+    endpoint: '/api/message',
   },
 };
 

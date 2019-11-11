@@ -13,24 +13,28 @@ interface ChatWindowProps {
 }
 
 const ChatWindow = ({ config, showWindow, setShowWindow }: ChatWindowProps) => {
+  const [uuid, setUuid] = useState<string>('');
   const { chat } = config;
   const initialConversation = chat.defaultGreetings
     ? chat.defaultGreetings.map((text: string): BotResponse => ({
-      // TODO: ID to be replaced
-      recipient_id: 'bot_test',
+      recipient_id: uuid,
       text,
     })) : [];
   const [conversation, setConversation] = useState<Message[]>(initialConversation);
 
-  const handleMessage = (message: string) => {
-    return sendMessage(message)
-      .then((response: any) => {
+  const handleMessage = (text: string) => {
+    const userInput = {
+      sender: uuid,
+      text,
+    };
+    return sendMessage(userInput).then((response: BotResponse[]) => {
+        if (response.length > 0 && response[0].recipient_id) {
+          setUuid(response[0].recipient_id);
+        }
+
         setConversation([
           ...conversation,
-          {
-            sender: 'todo: something I will take care later',
-            text: message,
-          },
+          userInput,
           ...response,
         ]);
       })

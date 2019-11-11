@@ -1,8 +1,8 @@
 import { Component, h } from 'preact';
 import CONFIG from '../config';
+import { PropRef, useRef } from 'preact/hooks';
 
 interface InputState {
-  value: string;
   disabled: boolean;
 }
 
@@ -11,16 +11,15 @@ interface InputProps {
 }
 
 class Input extends Component<InputProps, InputState> {
-  state = {
-    value: '',
-    disabled: false,
-  };
+  textarea: PropRef<HTMLTextAreaElement>;
 
-  onInput = (event: any) => {
-    if (event.code === 'Enter' || event.keyCode === 13) return;
-    this.setState({
-      value: event.target.value,
-    });
+  constructor(props: InputProps) {
+    super(props);
+    this.textarea = useRef();
+  }
+
+  state = {
+    disabled: false,
   };
 
   onKeyUp = (event: KeyboardEvent) => {
@@ -29,11 +28,14 @@ class Input extends Component<InputProps, InputState> {
       this.setState({
         disabled: true,
       });
-      this.props.sendMessage(this.state.value).then(() => {
+      const value = (event.target as HTMLInputElement).value;
+      this.props.sendMessage(value).then(() => {
         this.setState({
           disabled: false,
-          value: '',
         });
+        if (this.textarea.current) {
+          this.textarea.current.value = ''
+        }
       }).catch(() => {
         this.setState({
           disabled: false,
@@ -42,16 +44,15 @@ class Input extends Component<InputProps, InputState> {
     }
   };
 
-  render(_: any, { value, disabled }: InputState) {
+  render(_: any, { disabled }: InputState) {
+    // this.textarea = useRef();
     return (<div className='input-wrap'>
       <textarea
-        value={value}
+        ref={this.textarea}
         disabled={disabled}
         placeholder={CONFIG.chat.defaultPlaceholder}
-        onInput={this.onInput}
         onKeyUp={this.onKeyUp} />
     </div>);
-
   }
 }
 

@@ -15,7 +15,7 @@ const BubbleContainer = (props: BubbleProps) => {
       {
         isBot ? (<BotMessageSwitch message={message as BotResponse} />)
           : (<span className='bubble-button bubble-pick'>
-            <TextBubble text={message.text || ''} />
+            <TextBubble text={(message as UserInput).text || ''} />
           </span>)
       }
         </span>
