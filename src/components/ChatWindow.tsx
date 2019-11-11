@@ -12,19 +12,14 @@ interface ChatWindowProps {
   setShowWindow: (show: boolean) => void;
 }
 
-const initialConversation: Message[] = [
-  {
-    sender: 'test1',
-    text: 'Hello',
-  },
-  {
-    recipient_id: 'test1',
-    text: 'Hi, I am Jamie',
-  },
-];
-
 const ChatWindow = ({ config, showWindow, setShowWindow }: ChatWindowProps) => {
   const { chat } = config;
+  const initialConversation = chat.defaultGreetings
+    ? chat.defaultGreetings.map((text: string): BotResponse => ({
+      // TODO: ID to be replaced
+      recipient_id: 'bot_test',
+      text,
+    })) : [];
   const [conversation, setConversation] = useState<Message[]>(initialConversation);
 
   const handleMessage = (message: string) => {
