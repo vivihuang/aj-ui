@@ -8,9 +8,9 @@ const BotMessageSwitch = ({ message }: { message: BotResponse }) => {
   const botMsgType = getBotMessageType(message);
   switch (botMsgType) {
     case BotResponseType.text:
-      return (<TextBubble text={message.text || ''} />);
+      return (<TextBubble text={(message as BotResponseText).text} />);
     case BotResponseType.image:
-      return (<ImageBubble message={message}/>);
+      return (<ImageBubble message={message as BotResponseImage} />);
     default:
       return null;
   }

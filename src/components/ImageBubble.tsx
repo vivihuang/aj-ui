@@ -1,7 +1,7 @@
 import { h } from 'preact';
 
 interface ImageBubbleProps {
-  message: BotResponse;
+  message: BotResponseImage;
 }
 
 const ImageBubble = ({ message }: ImageBubbleProps) => {

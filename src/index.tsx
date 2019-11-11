@@ -1,6 +1,6 @@
 import './index.scss';
 
-import { render, h } from 'preact';
+import { h, render } from 'preact';
 
 import config from './config';
 import Chatbot from './Chatbot';

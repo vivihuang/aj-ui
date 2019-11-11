@@ -7,7 +7,7 @@ interface SwitcherOptions {
 
 const Switcher = (props: SwitcherOptions) => {
   const { text, onClick } = props;
-  return (<button className='chat-button' onClick={onClick}>{text}</button>)
+  return (<button className='chat-button' onClick={onClick}>{text}</button>);
 };
 
 export default Switcher;

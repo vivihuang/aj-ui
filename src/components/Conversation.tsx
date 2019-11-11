@@ -21,7 +21,7 @@ const Conversation = ({ conversation }: ConversationOptions) => {
         return (<BubbleContainer message={message} key={idx} />);
       })
     }
-    </div>);
+  </div>);
 };
 
 export default Conversation;

@@ -9,6 +9,7 @@ describe('# Message Type Guards', () => {
     };
     expect(isUserInput(userMessage)).toBeTruthy();
   });
+
   it('should not be user message when get bot message', () => {
     const botMessage: BotResponse = {
       text: 'Hello',
@@ -16,6 +17,7 @@ describe('# Message Type Guards', () => {
     };
     expect(isUserInput(botMessage)).toBeFalsy();
   });
+
   it('should able to correctly assert bot response type', function () {
     const botTextMessage: BotResponse = {
       recipient_id: 'uuid-22222',
@@ -24,10 +26,10 @@ describe('# Message Type Guards', () => {
     expect(getBotMessageType(botTextMessage)).toEqual(BotResponseType.text);
     const botImageMessage: BotResponse = {
       recipient_id: 'uuid-22222',
-      image: 'httpl',
+      image: 'http:',
     };
     expect(getBotMessageType(botImageMessage)).toEqual(BotResponseType.image);
-    const unknownMessage: BotResponse = {
+    const unknownMessage: any = {
       recipient_id: 'uuid-2222',
     };
     expect(() => {

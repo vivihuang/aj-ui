@@ -34,7 +34,7 @@ class Input extends Component<InputProps, InputState> {
           disabled: false,
         });
         if (this.textarea.current) {
-          this.textarea.current.value = ''
+          this.textarea.current.value = '';
         }
       }).catch(() => {
         this.setState({
