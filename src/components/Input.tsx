@@ -1,4 +1,5 @@
 import { Component, h } from 'preact';
+import CONFIG from '../config';
 
 interface InputState {
   value: string;
@@ -44,6 +45,7 @@ class Input extends Component<InputProps, InputState> {
       <textarea
         value={value}
         disabled={disabled}
+        placeholder={CONFIG.chat.defaultPlaceholder}
         onInput={this.onInput}
         onKeyUp={this.onKeyUp} />
     </div>)
