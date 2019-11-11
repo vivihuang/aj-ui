@@ -1,5 +1,4 @@
 import { Component, h } from 'preact';
-import { sendMessage } from '../utils/request';
 
 interface InputState {
   value: string;
@@ -12,7 +11,7 @@ interface InputProps {
 
 class Input extends Component<InputProps, InputState> {
   state = {
-    value: 'initial value',
+    value: '',
     disabled: false,
   };
 
@@ -27,7 +26,7 @@ class Input extends Component<InputProps, InputState> {
       this.setState({
         disabled: true,
       });
-      sendMessage(this.state.value).then(() => {
+      this.props.sendMessage(this.state.value).then(() => {
         this.setState({
           disabled: false,
           value: '',

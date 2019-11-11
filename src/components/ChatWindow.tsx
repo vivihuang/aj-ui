@@ -3,9 +3,7 @@ import { h } from 'preact';
 import ChatHeader from './ChatHeader'
 import Conversation from './Conversation'
 import Input from './Input';
-import { initState } from '../store';
-import { useReducer } from 'preact/hooks';
-import { reducer } from '../store/reducer';
+import { useState } from 'preact/hooks';
 import { sendMessage } from '../utils/request';
 
 interface ChatWindowProps {
@@ -14,19 +12,36 @@ interface ChatWindowProps {
   setShowWindow: (show: boolean) => void;
 }
 
+const initialConversation = [
+  {
+    sender: 'test1',
+    message: 'Hello',
+  },
+  {
+    recipient_id: 'test1',
+    text: 'Hi, I am Jamie',
+  },
+];
+
 const ChatWindow = ({ config, showWindow, setShowWindow }: ChatWindowProps) => {
   const { chat } = config;
-  const [{ conversation }] = useReducer(reducer, initState);
+  const [conversation, setConversation] = useState(initialConversation);
 
   const handleMessage = (message: string) => {
-    console.log(message);
     sendMessage(message)
       .then((response: any) => {
-        // TODO: append to conversation history
-        return response;
+        setConversation([
+          ...conversation,
+          {
+            sender: 'todo: something I will take care later',
+            message,
+          },
+          ...response,
+        ]);
+        // return response;
       })
       .catch((error: any) => {
-        // TODO: error handling
+        // TODO: Display an error message to the user
         console.error(error);
       });
   };
