@@ -1,18 +1,24 @@
-import TextBubble from './TextBubble';
-import { isMessageInput } from '../utils/type-guards';
 import { h } from 'preact';
+import BubbleContainer from './BubbleContainer';
+import { useEffect, useRef } from 'preact/hooks';
 
 interface ConversationOptions {
-  conversation: ConversationHistory;
+  conversation: Message[];
 }
 
 const Conversation = ({ conversation }: ConversationOptions) => {
-  return (<div className='bubble-wrap'>
+  const wrapper = useRef<HTMLDivElement>();
+  useEffect(() => {
+    setTimeout(() => {
+      if (wrapper.current) {
+        wrapper.current.scrollTop = wrapper.current.scrollHeight;
+      }
+    }, 0);
+  }, [conversation]);
+  return (<div className='bubble-wrap' ref={wrapper}>
     {
-      conversation && conversation.length > 0 && conversation.map((message) => {
-        return isMessageInput(message)
-          ? <TextBubble text={message.message} isBot={false}/>
-          : <TextBubble text={message.text || ''} isBot={true}/>
+      conversation && conversation.length > 0 && conversation.map((message, idx) => {
+        return (<BubbleContainer message={message} key={idx} />);
       })
     }
     </div>);

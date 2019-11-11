@@ -11,15 +11,9 @@ export const sendMessage = (message: string) => {
         if (xhr.getResponseHeader('content-type') === 'application/json') {
           const result = JSON.parse(xhr.responseText);
           console.log('result', result);
-          const response = {
-            says: result.map((item: any) => {
-              if (item.image) return `<img src="${item.image}">`;
-              return item.text;
-            }),
-          };
-          resolve(response);
+          return resolve(result);
         } else {
-          reject(xhr.responseText);
+          return reject(xhr.responseText);
         }
       }
     };

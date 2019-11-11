@@ -1,21 +1,21 @@
-$primary: #FB761E;
-$text: #48413F;
-$white: #FFFFFF;
-$light: #cccccc;
-$font-family: 'Roboto','Segoe UI',Helvetica, Helvetica Neue, Arial, Hiragino Sans GB, Segoe UI, sans-serif;
+$primary: #fb761e;
+$text: #48413f;
+$white: #fff;
+$light: #ccc;
+$font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
 
 // chat window
-$background: #FDFDFD;
-$bubble-bg-bot: #FFFFFF;
+$background: #fdfdfd;
+$bubble-bg-bot: #fff;
 $bubble-bg-user: $primary;
-$text-bot: #48413F;
-$text-user: #FDFDFD;
-$text-placeholder: #AAA7A4;
-$input-bg: #FFFFFF;
+$text-bot: #48413f;
+$text-user: #fdfdfd;
+$text-placeholder: #aaa7a4;
+$input-bg: #fff;
 $input-text: $text;
-$input-placeholder: rgba(255, 255, 255, .5);
+$input-placeholder: rgba(#fff, .5);
 $button-bg: $primary;
-$button-text: #FFFFFF;
+$button-text: #fff;
 
 // open chat button
 $chat-button-bg: $primary;

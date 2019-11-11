@@ -1,5 +1,5 @@
 import { Component, h } from 'preact';
-import { sendMessage } from '../utils/request';
+import CONFIG from '../config';
 
 interface InputState {
   value: string;
@@ -7,16 +7,17 @@ interface InputState {
 }
 
 interface InputProps {
-  sendMessage: (message: string) => any;
+  sendMessage: (message: string) => Promise<any>;
 }
 
 class Input extends Component<InputProps, InputState> {
   state = {
-    value: 'initial value',
+    value: '',
     disabled: false,
   };
 
   onInput = (event: any) => {
+    if (event.code === 'Enter' || event.keyCode === 13) return;
     this.setState({
       value: event.target.value,
     });
@@ -24,10 +25,11 @@ class Input extends Component<InputProps, InputState> {
 
   onKeyUp = (event: KeyboardEvent) => {
     if (event.code === 'Enter' || event.keyCode === 13) {
+      event.preventDefault();
       this.setState({
         disabled: true,
       });
-      sendMessage(this.state.value).then(() => {
+      this.props.sendMessage(this.state.value).then(() => {
         this.setState({
           disabled: false,
           value: '',
@@ -36,7 +38,7 @@ class Input extends Component<InputProps, InputState> {
         this.setState({
           disabled: false,
         });
-      })
+      });
     }
   };
 
@@ -45,9 +47,10 @@ class Input extends Component<InputProps, InputState> {
       <textarea
         value={value}
         disabled={disabled}
+        placeholder={CONFIG.chat.defaultPlaceholder}
         onInput={this.onInput}
         onKeyUp={this.onKeyUp} />
-    </div>)
+    </div>);
 
   }
 }

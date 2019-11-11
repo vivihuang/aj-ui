@@ -2,6 +2,7 @@ interface ChatConfig {
   buttonText: string;
   headerText: string;
   defaultGreetings: string[];
+  defaultPlaceholder: string;
   avatar: string;
 }
 

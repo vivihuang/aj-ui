@@ -11,7 +11,7 @@ describe('# Test conversation', () => {
   });
 
   it('should be emit when dispatch ADD_CONVERSATION', () => {
-    const botSaid: MessageResponse = { recipient_id: 'uuid-66666', text: 'Hello' };
+    const botSaid: BotResponse = { recipient_id: 'uuid-66666', text: 'Hello' };
     const initState = {
       conversation: [],
     };

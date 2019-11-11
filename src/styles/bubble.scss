@@ -1,53 +1,133 @@
-.bubble-container {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  max-width: 750px;
-  height: 520px;
-  margin: 0 auto;
-  background: $background;
+* {
+  box-sizing: inherit;
 }
 
-.bubble-wrap {
-  position: absolute;
-  top: 32px;
-  right: -17px;
-  bottom: 0;
-  left: 0;
-  overflow-y: scroll;
-  padding: 16px calc(17px + 10px) 30px 12px;
-  -webkit-transform: translate3d(0, 0, 0);
-  -webkit-overflow-scrolling: touch;
+body {
+  font-family: $font-family;
+  box-sizing: border-box;
 }
 
-.chat-header {
-  background-color: $primary;
-  color: $white;
-  padding: 12px;
-  display: flex;
-  justify-content: space-between;
-  position: relative;
-  h4 {
-    margin: 0;
+.float-left {
+  right: unset;
+  left: 10px !important;
+}
+
+.chat-button {
+  font-size: 16px;
+  position: fixed;
+  right: -1px;
+  bottom: 24px;
+  padding: 12px 24px;
+  cursor: pointer;
+  color: $chat-button-text;
+  border-radius: 24px 0 0 24px;
+  background-color: $chat-button-bg;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.44);
+
+  &:hover {
+    opacity: .9;
   }
-  .minimize-button {
-    display: block;
-    padding: 0 8px;
-    line-height: 16px;
-    cursor: pointer;
-    &:hover {
-      opacity: .8;
+
+  &:active, &:focus {
+    border: none;
+    outline: none;
+  }
+}
+
+.bubble-container {
+  position: fixed;
+  right: 10px;
+  bottom: 80px;
+  display: none;
+  overflow: hidden;
+  flex-direction: column;
+  width: 100%;
+  min-width: 300px;
+  max-width: 420px;
+  height: 420px;
+  min-height: 100px;
+  max-height: 700px;
+  border: 1px solid $light;
+  border-radius: 12px 12px 0 0;
+  background: $background;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.12);
+
+  &.active {
+    display: flex;
+  }
+
+  .chat-header {
+    line-height: 40px;
+    position: relative;
+    display: flex;
+    flex: none;
+    justify-content: space-between;
+    height: 40px;
+    padding: 0 12px;
+    color: $white;
+    background-color: $primary;
+
+    h4 {
+      margin: 0;
+    }
+
+    .minimize-button {
+      line-height: 40px;
+      display: block;
+      padding: 0 8px;
+      cursor: pointer;
+      text-decoration: none;
+      color: #fff;
+
+      &:hover {
+        opacity: .8;
+      }
+    }
+
+    .avatar {
+      position: absolute;
+      right: 60px;
+      bottom: 0;
+      max-width: 40px;
     }
   }
-  .avatar {
-    position: absolute;
-    bottom: 0;
-    right: 60px;
-    max-width: 40px;
+
+  .bubble-wrap {
+    overflow-y: scroll;
+    flex: auto;
+    padding: 16px;
+  }
+
+  .input-wrap {
+    flex: none;
+    color: #2c2c2c;
+
+    textarea {
+      font-family: $font-family;
+      font-size: 1em;
+      font-weight: 400;
+      line-height: 1.25em;
+      box-sizing: border-box;
+      width: calc(100% - 20px);
+      margin: 10px;
+      padding: 10px 15px;
+      resize: none;
+      letter-spacing: .5px;
+      color: $text;
+      border: none;
+      border-radius: 15px;
+      outline: none;
+      background: rgba(250, 250, 250, 0.95);
+      box-shadow: 0 0 0 1px #d0d0d0 inset;
+
+      &:disabled {
+        opacity: .7;
+      }
+    }
   }
 }
 
-/* style bubbles */
+
 .bubble,
 .bubble-typing {
   font-size: 14px;
@@ -55,7 +135,6 @@
   line-height: 1.5em;
   float: none;
   clear: both;
-  box-sizing: content-box;
   max-width: 65%;
   margin: 0 0 12px 0;
   padding: 8px 16px;
@@ -71,7 +150,7 @@
 }
 
 .bubble {
-  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
 }
 
 .bubble .bubble-content {
@@ -98,7 +177,9 @@
 .bubble .bubble-content img {
   display: block;
   overflow: hidden;
-  width: calc(100% + 32px);
+  //width: calc(100% + 32px);
+  height: 160px;
+  max-height: 100%;
   margin: -8px -16px;
   border-radius: 5px 15px 15px 15px;
 }
@@ -144,7 +225,6 @@
 .bubble.reply .bubble-content .bubble-button {
   display: inline-block;
   float: right;
-  box-sizing: content-box;
   margin-left: 2px;
   padding: 8px 16px;
   cursor: pointer;
@@ -213,9 +293,9 @@
 
 /* input fields for bubbles */
 .bubble .bubble-content input {
+  color: $text;
   border: 0;
   outline: 0;
-  color: $text;
   background: linear-gradient(193deg, #1faced, #5592dc 100%) !important;
   box-shadow: 0 0 1px 0 #000, 0 -1px 0 0px rgba(255, 255, 255, 0.38) inset;
   text-shadow: 0 1px rgba(0, 0, 0, 0.35);
@@ -280,35 +360,6 @@
   }
 }
 
-/* style user input field */
-.bubble-container .input-wrap {
-  font-family: $font-family;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  color: #2c2c2c;
-}
-
-.bubble-container .input-wrap textarea {
-  font-family: $font-family;
-  font-size: 1em;
-  font-weight: 400;
-  line-height: 1.25em;
-  width: calc(100% - 20px);
-  margin: 10px;
-  padding: 10px 15px;
-  letter-spacing: .5px;
-  color: $text;
-  border: none;
-  border-radius: 15px;
-  outline: none;
-  background: rgba(250, 250, 250, 0.95);
-  box-shadow: 0 0 0 1px #d0d0d0 inset;
-  &:disabled {
-    opacity: .7;
-  }
-}
 
 .bubble.reply-freeform {
   margin: 0;
