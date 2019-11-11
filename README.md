@@ -51,12 +51,12 @@ Please refer to `./examples/index.html`.
 **Start S3 Proxy**
 ```bash
 # build docker image
-docker build -t jamie-s3-proxy .
+docker build -t aj/ukraine .
 
 # run the container
-docker run -p 3000:3000 -t jamie-s3-proxy
+docker run -p 3000:3000 -t aj/ukraine
 # run in background
-docker run -d -p 3000:3000 -t jamie-s3-proxy
+docker run -d -p 3000:3000 -t aj/ukraine
 ```
 
 Visit [http://localhost/index.html](http://localhost/index.html);
