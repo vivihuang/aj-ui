@@ -6,6 +6,7 @@ import Input from './Input';
 import { initState } from '../store';
 import { useReducer } from 'preact/hooks';
 import { reducer } from '../store/reducer';
+import { sendMessage } from '../utils/request';
 
 interface ChatWindowProps {
   config: ChatbotConfig;
@@ -17,6 +18,19 @@ const ChatWindow = ({ config, showWindow, setShowWindow }: ChatWindowProps) => {
   const { chat } = config;
   const [{ conversation }] = useReducer(reducer, initState);
 
+  const handleMessage = (message: string) => {
+    console.log(message);
+    sendMessage(message)
+      .then((response: any) => {
+        // TODO: append to conversation history
+        return response;
+      })
+      .catch((error: any) => {
+        // TODO: error handling
+        console.error(error);
+      });
+  };
+
   return (<div className={`bubble-container ${showWindow ? 'active' : 'inactive'}`}>
     <ChatHeader
       text={chat.headerText}
@@ -27,7 +41,7 @@ const ChatWindow = ({ config, showWindow, setShowWindow }: ChatWindowProps) => {
       }}
     />
     <Conversation conversation={conversation} />
-    <Input />
+    <Input sendMessage={handleMessage} />
   </div>)
 };
 

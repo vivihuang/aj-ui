@@ -1,11 +1,20 @@
 import { Component, h } from 'preact';
+import { sendMessage } from '../utils/request';
 
 interface InputState {
   value: string;
+  disabled: boolean;
 }
 
-class Input extends Component<any, InputState> {
-  state = { value: 'initial value' };
+interface InputProps {
+  sendMessage: (message: string) => any;
+}
+
+class Input extends Component<InputProps, InputState> {
+  state = {
+    value: 'initial value',
+    disabled: false,
+  };
 
   onInput = (event: any) => {
     this.setState({
@@ -16,14 +25,28 @@ class Input extends Component<any, InputState> {
   onKeyUp = (event: KeyboardEvent) => {
     if (event.code === 'Enter' || event.keyCode === 13) {
       this.setState({
-        value: '',
+        disabled: true,
+      });
+      sendMessage(this.state.value).then(() => {
+        this.setState({
+          disabled: false,
+          value: '',
+        });
+      }).catch(() => {
+        this.setState({
+          disabled: false,
+        });
       })
     }
   };
 
-  render(_: any, { value }: InputState) {
+  render(_: any, { value, disabled }: InputState) {
     return (<div className='input-wrap'>
-      <textarea value={value} onInput={this.onInput} onKeyUp={this.onKeyUp} />
+      <textarea
+        value={value}
+        disabled={disabled}
+        onInput={this.onInput}
+        onKeyUp={this.onKeyUp} />
     </div>)
 
   }
