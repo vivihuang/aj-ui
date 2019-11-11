@@ -6,6 +6,7 @@ module.exports = {
         filename: 'rasa-chatbot.js',
     },
     mode: 'development',
+    devtool: 'cheap-module-eval-source-map',
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.scss'],
     },

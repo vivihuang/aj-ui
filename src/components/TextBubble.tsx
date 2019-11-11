@@ -5,34 +5,8 @@ interface TextBubbleOptions {
   isBot: boolean;
 }
 
-// const TextBubble = ({ text, isBot }: TextBubbleOptions) => {
-//   const bubble = createElement('div', {
-//     class: ['bubble', 'text-bubble', 'say', ...isBot ? [] : ['reply']],
-//   });
-//
-//
-//   if (isBot) {
-//     const content = createElement('span', {
-//       class: 'bubble-content',
-//       text,
-//     });
-//     bubble.appendChild(content)
-//   } else {
-//     const content = createElement('span', {
-//       class: 'bubble-content'
-//     });
-//     const textWrapper = createElement('span', {
-//       class: ['bubble-button', 'bubble-pick'],
-//       text,
-//     });
-//     content.appendChild(textWrapper);
-//     bubble.appendChild(content);
-//   }
-//   return bubble;
-// };
-
 const TextBubble = ({ text, isBot }: TextBubbleOptions) => {
-  return (<div className='bubble text-bubble say'>
+  return (<div className={`bubble text-bubble say${isBot ? '' : ' reply'}`}>
     {
       isBot ? (<span className='bubble-content'>{text}</span>)
         : (<span className='bubble-content'>

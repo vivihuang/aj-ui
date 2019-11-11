@@ -5,6 +5,6 @@ export const reducer = (state: State, action: StateAction) => {
       return Object.assign({}, state, { conversation: newConversation });
     }
     default:
-      throw new Error('Unexpected action');
+      return state;
   }
 };
