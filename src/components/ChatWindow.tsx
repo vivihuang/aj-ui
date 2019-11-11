@@ -28,7 +28,7 @@ const ChatWindow = ({ config, showWindow, setShowWindow }: ChatWindowProps) => {
   const [conversation, setConversation] = useState<Message[]>(initialConversation);
 
   const handleMessage = (message: string) => {
-    sendMessage(message)
+    return sendMessage(message)
       .then((response: any) => {
         setConversation([
           ...conversation,

@@ -7,7 +7,7 @@ interface InputState {
 }
 
 interface InputProps {
-  sendMessage: (message: string) => any;
+  sendMessage: (message: string) => Promise<any>;
 }
 
 class Input extends Component<InputProps, InputState> {
@@ -17,6 +17,7 @@ class Input extends Component<InputProps, InputState> {
   };
 
   onInput = (event: any) => {
+    if (event.code === 'Enter' || event.keyCode === 13) return;
     this.setState({
       value: event.target.value,
     });
@@ -24,6 +25,7 @@ class Input extends Component<InputProps, InputState> {
 
   onKeyUp = (event: KeyboardEvent) => {
     if (event.code === 'Enter' || event.keyCode === 13) {
+      event.preventDefault();
       this.setState({
         disabled: true,
       });
@@ -36,7 +38,7 @@ class Input extends Component<InputProps, InputState> {
         this.setState({
           disabled: false,
         });
-      })
+      });
     }
   };
 
@@ -48,7 +50,7 @@ class Input extends Component<InputProps, InputState> {
         placeholder={CONFIG.chat.defaultPlaceholder}
         onInput={this.onInput}
         onKeyUp={this.onKeyUp} />
-    </div>)
+    </div>);
 
   }
 }
