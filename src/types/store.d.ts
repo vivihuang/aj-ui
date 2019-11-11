@@ -1,5 +1,5 @@
 interface State {
-  conversation: ConversationHistory;
+  conversation: Message[];
 }
 
 interface StateAction<P extends StateActionPayload = StateActionPayload,
@@ -9,5 +9,5 @@ interface StateAction<P extends StateActionPayload = StateActionPayload,
 }
 
 interface StateActionPayload {
-  ADD_CONVERSATION: MessageInput | MessageResponse;
+  ADD_CONVERSATION: UserInput | BotResponse;
 }

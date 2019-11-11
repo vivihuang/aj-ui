@@ -47,7 +47,7 @@ export const createChatbotJunior = () => {
             const result = JSON.parse(xhr.responseText);
             console.log('result', result);
             chatWindow.reply({
-              says: result.map((item: MessageResponse) => {
+              says: result.map((item: BotResponse) => {
                 if (item.image) return `<img src="${item.image}" alt="test">`;
                 return item.text;
               }),

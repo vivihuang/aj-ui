@@ -2,7 +2,7 @@ export const initState: State = {
   conversation: [
     {
       sender: 'test1',
-      message: 'Hello',
+      text: 'Hello',
     },
     {
       recipient_id: 'test1',

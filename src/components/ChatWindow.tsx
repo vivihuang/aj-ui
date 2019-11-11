@@ -12,10 +12,10 @@ interface ChatWindowProps {
   setShowWindow: (show: boolean) => void;
 }
 
-const initialConversation = [
+const initialConversation: Message[] = [
   {
     sender: 'test1',
-    message: 'Hello',
+    text: 'Hello',
   },
   {
     recipient_id: 'test1',
@@ -25,7 +25,7 @@ const initialConversation = [
 
 const ChatWindow = ({ config, showWindow, setShowWindow }: ChatWindowProps) => {
   const { chat } = config;
-  const [conversation, setConversation] = useState(initialConversation);
+  const [conversation, setConversation] = useState<Message[]>(initialConversation);
 
   const handleMessage = (message: string) => {
     sendMessage(message)
@@ -34,11 +34,10 @@ const ChatWindow = ({ config, showWindow, setShowWindow }: ChatWindowProps) => {
           ...conversation,
           {
             sender: 'todo: something I will take care later',
-            message,
+            text: message,
           },
           ...response,
         ]);
-        // return response;
       })
       .catch((error: any) => {
         // TODO: Display an error message to the user

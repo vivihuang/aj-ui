@@ -1,12 +1,12 @@
-interface MessageResponse {
+interface BotResponse {
   recipient_id: string;
   text?: string;
   image?: string;
 }
 
-interface MessageInput {
+interface UserInput {
   sender: string;
-  message: string;
+  text: string;
 }
 
-type ConversationHistory = (MessageResponse | MessageInput)[];
+type Message = (BotResponse | UserInput);
