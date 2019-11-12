@@ -1,5 +1,4 @@
 import { h } from 'preact';
-import { isUserInput } from '../utils/type-guards';
 import TextBubble from './TextBubble';
 import BotMessageSwitch from './BotMessageSwitch';
 
@@ -9,17 +8,21 @@ interface BubbleProps {
 
 const BubbleContainer = (props: BubbleProps) => {
   const { message } = props;
-  const isBot = !isUserInput(message);
-  return (<div className={`bubble text-bubble say${isBot ? '' : ' reply'}`}>
+  if ('recipient_id' in message) {
+    return (<div className="bubble text-bubble say">
       <span className='bubble-content'>
-      {
-        isBot ? (<BotMessageSwitch message={message as BotResponse} />)
-          : (<span className='bubble-button bubble-pick'>
-            <TextBubble text={(message as UserInput).text || ''} />
-          </span>)
-      }
+        <BotMessageSwitch message={message} />
+      </span>
+    </div>);
+  } else {
+    return (<div className="bubble text-bubble say reply">
+      <span className='bubble-content'>
+        <span className='bubble-button bubble-pick'>
+          <TextBubble text={message.text || ''} />
         </span>
-  </div>);
+      </span>
+    </div>);
+  }
 };
 
 export default BubbleContainer;
