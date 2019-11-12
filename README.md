@@ -18,7 +18,7 @@ If you need to develop locally, please follow the instructions below.
 # One time setup
 npm install
 
-# developing, running at localhost:3000
+# developing, running at localhost:4000
 npm start
 
 # build, then open dist/index.html
