@@ -15,7 +15,7 @@
   ],
   "scripts": {
     "build": "webpack --mode=production",
-    "start": "webpack-dev-server --port 4000",
+    "start": "webpack-dev-server",
     "serve": "webpack --hot",
     "watch": "webpack --watch",
     "test": "jest",
