@@ -1,7 +1,7 @@
 {
   "name": "aj-ukraine",
   "version": "0.1.0",
-  "description": "Simple chatbot UI for Rasa.",
+  "description": "Simple chatbot UI.",
   "main": "src/index.tsx",
   "license": "MIT",
   "keywords": [
