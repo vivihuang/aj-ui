@@ -8,11 +8,11 @@ interface BotResponseBase {
 
 interface BotResponseText extends BotResponseBase{
   text: string;
-  image?: null;
+  image: null;
 }
 
 interface BotResponseImage extends BotResponseBase {
-  text?: null;
+  text: null;
   image: string;
 }
 

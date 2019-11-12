@@ -9,12 +9,14 @@ interface BubbleProps {
 const BubbleContainer = (props: BubbleProps) => {
   const { message } = props;
   if ('recipient_id' in message) {
+    // message is BotResponse
     return (<div className="bubble text-bubble say">
       <span className='bubble-content'>
         <BotMessageSwitch message={message} />
       </span>
     </div>);
   } else {
+    // message is UserInput
     return (<div className="bubble text-bubble say reply">
       <span className='bubble-content'>
         <span className='bubble-button bubble-pick'>

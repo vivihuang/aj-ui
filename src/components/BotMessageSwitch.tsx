@@ -3,11 +3,12 @@ import ImageBubble from './ImageBubble';
 import { h } from 'preact';
 
 const BotMessageSwitch = ({ message }: { message: BotResponse }) => {
-  if ('text' in message) {
-    return (<TextBubble text={message.text || ''} />);
-  } else if ('image' in message) {
+  if (message.text) {
+    return (<TextBubble text={message.text} />);
+  } else if (message.image) {
     return (<ImageBubble message={message} />);
   }
+
   return null;
 };
 
