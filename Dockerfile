@@ -4,7 +4,7 @@ WORKDIR /usr/src/app
 
 COPY . .
 
-RUN npm install
+RUN npm install --no-optional
 RUN npm run build
 
 FROM nginx:1.17-alpine
