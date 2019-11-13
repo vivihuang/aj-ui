@@ -10,8 +10,7 @@
     "bot",
     "chatui",
     "conversation",
-    "javascript",
-    "rasa"
+    "javascript"
   ],
   "scripts": {
     "build": "webpack --mode=production",

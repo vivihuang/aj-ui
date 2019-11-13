@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
     entry: './src/index.tsx',
     output: {
-        filename: 'rasa-chatbot.js',
+        filename: 'aj-chatbot.js',
     },
     mode: 'development',
     devtool: 'cheap-module-eval-source-map',

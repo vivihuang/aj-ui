@@ -5,7 +5,7 @@ The chatbot UI is supposed to be imported as bundled JavaScript file, and automa
 ```html
 <script type="text/javascript">
   var el = document.createElement('script')
-  el.src = 'dist/rasa-chatbot.js'
+  el.src = 'dist/aj-chatbot.js'
   document.body.appendChild(el)
 </script>
 ```
