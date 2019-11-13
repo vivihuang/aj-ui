@@ -19,6 +19,7 @@ const ChatWindow = ({ config, showWindow, setShowWindow }: ChatWindowProps) => {
     ? chat.defaultGreetings.map((text: string): BotResponse => ({
       recipient_id: uuid,
       text,
+      image: null,
     })) : [];
   const [conversation, setConversation] = useState<Message[]>(initialConversation);
 
