@@ -30,10 +30,15 @@ class Input extends Component<InputProps, InputState> {
 
   onKeyUp = (event: KeyboardEvent) => {
     if (event.code === 'Enter' || event.keyCode === 13) {
+      const value = (event.target as HTMLInputElement).value.trim();
+      if(!value) {
+        if (this.textarea.current) this.textarea.current.value = '';
+        return
+      }
       this.setState({
         disabled: true,
       });
-      const value = (event.target as HTMLInputElement).value;
+
       this.props.sendMessage(value).then(() => {
         this.setState({
           disabled: false,
