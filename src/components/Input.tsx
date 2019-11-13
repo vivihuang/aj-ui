@@ -35,6 +35,11 @@ class Input extends Component<InputProps, InputState> {
         });
         if (this.textarea.current) {
           this.textarea.current.value = '';
+          setTimeout(() => {
+            if (this.textarea.current) {
+              this.textarea.current.focus();
+            }
+          }, 0)
         }
       }).catch(() => {
         this.setState({
@@ -45,7 +50,9 @@ class Input extends Component<InputProps, InputState> {
   };
 
   render(_: any, { disabled }: InputState) {
-    // this.textarea = useRef();
+    if (this.textarea.current) {
+      this.textarea.current.focus();
+    }
     return (<div className='input-wrap'>
       <textarea
         ref={this.textarea}
@@ -57,4 +64,3 @@ class Input extends Component<InputProps, InputState> {
 }
 
 export default Input;
-
