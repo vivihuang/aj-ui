@@ -227,13 +227,11 @@ body {
   float: right;
   margin-left: 2px;
   padding: 8px 16px;
-  cursor: pointer;
   transition: all 200ms;
   transform: translate3d(0px, 0px, 0px);
   animation-name: "animate-reply";
   animation-play-state: paused;
   animation-delay: -3s;
-  text-align: center;
   text-decoration: none;
   /* animation-duration: 1s; */
   word-break: normal;
