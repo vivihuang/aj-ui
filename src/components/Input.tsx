@@ -22,9 +22,14 @@ class Input extends Component<InputProps, InputState> {
     disabled: false,
   };
 
-  onKeyUp = (event: KeyboardEvent) => {
+  onKeyDown = (event: KeyboardEvent) => {
     if (event.code === 'Enter' || event.keyCode === 13) {
       event.preventDefault();
+    }
+  };
+
+  onKeyUp = (event: KeyboardEvent) => {
+    if (event.code === 'Enter' || event.keyCode === 13) {
       this.setState({
         disabled: true,
       });
@@ -39,7 +44,7 @@ class Input extends Component<InputProps, InputState> {
             if (this.textarea.current) {
               this.textarea.current.focus();
             }
-          }, 0)
+          }, 0);
         }
       }).catch(() => {
         this.setState({
@@ -58,7 +63,8 @@ class Input extends Component<InputProps, InputState> {
         ref={this.textarea}
         disabled={disabled}
         placeholder={CONFIG.chat.defaultPlaceholder}
-        onKeyUp={this.onKeyUp} />
+        onKeyUp={this.onKeyUp}
+        onKeyDown={this.onKeyDown} />
     </div>);
   }
 }
