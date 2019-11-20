@@ -4,14 +4,15 @@ import ButtonBubble from './ButtonBubble';
 
 interface TextWithButtonsProps {
   message: BotResponseText;
+  handleMessage: (text: string) => void;
 }
 
 
 const TextWithButtons = (props: TextWithButtonsProps) => {
-  const {message} = props
+  const {message, handleMessage} = props
   return (<div>
     <TextBubble text={message.text}></TextBubble>
-    <ButtonBubble buttons={message.buttons}></ButtonBubble>
+    <ButtonBubble buttons={message.buttons} handleMessage={handleMessage}></ButtonBubble>
   </div>)
 }
 

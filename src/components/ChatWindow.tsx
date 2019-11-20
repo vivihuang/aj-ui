@@ -55,7 +55,7 @@ const ChatWindow = ({config, showWindow, setShowWindow}: ChatWindowProps) => {
         setShowWindow(false);
       }}
     />
-    <Conversation conversation={conversation}/>
+    <Conversation conversation={conversation} handleMessage={handleMessage}/>
     <Input sendMessage={handleMessage}/>
   </div>)
 };

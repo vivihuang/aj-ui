@@ -8,14 +8,14 @@ export const sendMessage = (message: UserInput): Promise<BotResponse[]> => {
     xhr.onreadystatechange = () => {
       if (xhr.readyState === 4) {
         if (xhr.getResponseHeader('content-type') === 'application/json') {
-          const result = JSON.parse(xhr.responseText);
+          const result = JSON.parse(xhr.responseText) as BotResponse[];
           return resolve(result);
         } else {
           return reject(xhr.responseText);
         }
       }
     };
-    const { sender, text } = message;
+    const {sender, text} = message;
     const data = sender ? {
       sender,
       message: text,

@@ -4,15 +4,17 @@ import BotMessageSwitch from './BotMessageSwitch';
 
 interface BubbleProps {
   message: Message;
+  handleMessage: (text: string) => void;
+
 }
 
 const BubbleContainer = (props: BubbleProps) => {
-  const { message } = props;
+  const { message, handleMessage } = props;
   if ('recipient_id' in message) {
     // message is BotResponse
     return (<div className="bubble text-bubble say">
       <span className='bubble-content'>
-        <BotMessageSwitch message={message} />
+        <BotMessageSwitch message={message} handleMessage={handleMessage} />
       </span>
     </div>);
   } else {

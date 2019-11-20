@@ -3,9 +3,14 @@ import ImageBubble from './ImageBubble';
 import TextWithButtons from './TextWithButtons';
 import {h} from 'preact';
 
-const BotMessageSwitch = ({message}: { message: BotResponse }) => {
+interface BotMessageSwitchProps {
+    message: BotResponse;
+    handleMessage: (text: string) => void;
+}
+const BotMessageSwitch = ({message, handleMessage}: BotMessageSwitchProps) => {
+
     if (message.buttons.length) {
-        return (<TextWithButtons message={message as BotResponseText}></TextWithButtons>)
+        return (<TextWithButtons message={message as BotResponseText} handleMessage={handleMessage}></TextWithButtons>)
     } else if (message.text) {
         return (<TextBubble text={message.text}/>);
     } else if (message.image) {

@@ -1,12 +1,13 @@
-import { h } from 'preact';
+import {h} from 'preact';
 import BubbleContainer from './BubbleContainer';
-import { useEffect, useRef } from 'preact/hooks';
+import {useEffect, useRef} from 'preact/hooks';
 
 interface ConversationOptions {
   conversation: Message[];
+  handleMessage: (text: string) => void;
 }
 
-const Conversation = ({ conversation }: ConversationOptions) => {
+const Conversation = ({conversation, handleMessage}: ConversationOptions) => {
   const wrapper = useRef<HTMLDivElement>();
   useEffect(() => {
     setTimeout(() => {
@@ -18,7 +19,7 @@ const Conversation = ({ conversation }: ConversationOptions) => {
   return (<div className='bubble-wrap' ref={wrapper}>
     {
       conversation && conversation.length > 0 && conversation.map((message, idx) => {
-        return (<BubbleContainer message={message} key={idx} />);
+        return (<BubbleContainer message={message} key={idx} handleMessage={handleMessage}/>);
       })
     }
   </div>);
