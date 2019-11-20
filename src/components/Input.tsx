@@ -15,9 +15,7 @@ class Input extends Component<any, InputState> {
     this.textarea = useRef();
   }
 
-  state = {
-    disabled: false,
-  };
+  state = { disabled: false, };
 
   onKeyDown = (event: KeyboardEvent) => {
     if (event.code === 'Enter' || event.keyCode === 13) {
@@ -32,14 +30,10 @@ class Input extends Component<any, InputState> {
         if (this.textarea.current) this.textarea.current.value = '';
         return
       }
-      this.setState({
-        disabled: true,
-      });
+      this.setState({ disabled: true, });
 
       handleMessage(value).then(() => {
-        this.setState({
-          disabled: false,
-        });
+        this.setState({ disabled: false, });
         if (this.textarea.current) {
           this.textarea.current.value = '';
           setTimeout(() => {
@@ -49,9 +43,7 @@ class Input extends Component<any, InputState> {
           }, 0);
         }
       }).catch(() => {
-        this.setState({
-          disabled: false,
-        });
+        this.setState({ disabled: false, });
       });
     }
   };

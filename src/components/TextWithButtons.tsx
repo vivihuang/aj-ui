@@ -1,4 +1,4 @@
-import {h} from 'preact';
+import { h } from 'preact';
 import TextBubble from './TextBubble';
 import ButtonBubble from './ButtonBubble';
 
@@ -7,7 +7,7 @@ interface TextWithButtonsProps {
 }
 
 const TextWithButtons = (props: TextWithButtonsProps) => {
-  const {message} = props;
+  const { message } = props;
   return (<div>
     <TextBubble text={message.text}/>
     <ButtonBubble buttons={message.buttons}/>

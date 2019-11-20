@@ -15,13 +15,11 @@ export const sendMessage = (message: UserInput): Promise<BotResponse[]> => {
         }
       }
     };
-    const {sender, text} = message;
+    const { sender, text } = message;
     const data = sender ? {
       sender,
       message: text,
-    } : {
-      message: text,
-    };
+    } : { message: text, };
     xhr.send(JSON.stringify(data));
   });
 };

@@ -12,7 +12,7 @@ const Chatbot = ({ config }: { config: ChatbotConfig}) => {
       <ChatWindow config={config} showWindow={showWindow} setShowWindow={setShowWindow} />
       <Switcher text={config.chat.buttonText} onClick={() => {
         setShowWindow(!showWindow);
-        }} />
+      }} />
     </div>
   </ConversationProvider>);
 };
