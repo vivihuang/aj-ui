@@ -4,16 +4,14 @@ import ButtonBubble from './ButtonBubble';
 
 interface TextWithButtonsProps {
   message: BotResponseText;
-  handleMessage: (text: string) => void;
 }
-
 
 const TextWithButtons = (props: TextWithButtonsProps) => {
-  const {message, handleMessage} = props
+  const {message} = props;
   return (<div>
-    <TextBubble text={message.text}></TextBubble>
-    <ButtonBubble buttons={message.buttons} handleMessage={handleMessage}></ButtonBubble>
+    <TextBubble text={message.text}/>
+    <ButtonBubble buttons={message.buttons}/>
   </div>)
-}
+};
 
-export default TextWithButtons
+export default TextWithButtons;

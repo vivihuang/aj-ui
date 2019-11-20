@@ -5,12 +5,11 @@ import {h} from 'preact';
 
 interface BotMessageSwitchProps {
     message: BotResponse;
-    handleMessage: (text: string) => void;
 }
-const BotMessageSwitch = ({message, handleMessage}: BotMessageSwitchProps) => {
+const BotMessageSwitch = ({message }: BotMessageSwitchProps) => {
 
     if (message.buttons.length) {
-        return (<TextWithButtons message={message as BotResponseText} handleMessage={handleMessage}></TextWithButtons>)
+        return (<TextWithButtons message={message as BotResponseText} />)
     } else if (message.text) {
         return (<TextBubble text={message.text}/>);
     } else if (message.image) {

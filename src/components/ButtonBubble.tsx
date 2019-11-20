@@ -1,16 +1,16 @@
-import {h} from 'preact';
+import { h } from 'preact';
+import { handleMessage } from '../store/actions';
 
 interface ButtonBubbleProps {
   buttons: BotResponseBase['buttons'];
-  handleMessage: (text: string) => void;
 }
 
 const ButtonBubble = (props: ButtonBubbleProps) => {
-  const {buttons, handleMessage} = props;
+  const { buttons } = props;
 
   const onClickButton = (event: Event, text: string) => {
-    handleMessage(text)
-  }
+    return handleMessage(text);
+  };
 
   return <div className="button-group">
     {buttons.map((button, index) => {
@@ -19,6 +19,6 @@ const ButtonBubble = (props: ButtonBubbleProps) => {
       </div>
     })}
   </div>
-}
+};
 
-export default ButtonBubble
+export default ButtonBubble;

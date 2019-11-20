@@ -1,19 +1,16 @@
 import { Component, h } from 'preact';
 import CONFIG from '../config';
 import { PropRef, useRef } from 'preact/hooks';
+import { handleMessage } from '../store/actions';
 
 interface InputState {
   disabled: boolean;
 }
 
-interface InputProps {
-  sendMessage: (message: string) => Promise<any>;
-}
-
-class Input extends Component<InputProps, InputState> {
+class Input extends Component<any, InputState> {
   textarea: PropRef<HTMLTextAreaElement>;
 
-  constructor(props: InputProps) {
+  constructor(props: any) {
     super(props);
     this.textarea = useRef();
   }
@@ -39,7 +36,7 @@ class Input extends Component<InputProps, InputState> {
         disabled: true,
       });
 
-      this.props.sendMessage(value).then(() => {
+      handleMessage(value).then(() => {
         this.setState({
           disabled: false,
         });

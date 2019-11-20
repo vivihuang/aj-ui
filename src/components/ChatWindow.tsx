@@ -1,10 +1,10 @@
-import {h} from 'preact';
+import { h } from 'preact';
 
 import ChatHeader from './ChatHeader'
 import Conversation from './Conversation'
 import Input from './Input';
-import {useState} from 'preact/hooks';
-import {sendMessage} from '../utils/request';
+import { useConversationState } from '../store';
+import { INIT_CONVERSATION } from '../store/constants';
 
 interface ChatWindowProps {
   config: ChatbotConfig;
@@ -12,39 +12,21 @@ interface ChatWindowProps {
   setShowWindow: (show: boolean) => void;
 }
 
-const ChatWindow = ({config, showWindow, setShowWindow}: ChatWindowProps) => {
-  const [uuid, setUuid] = useState<string>('');
-  const {chat} = config;
-  const initialConversation = chat.defaultGreetings
-    ? chat.defaultGreetings.map((text: string): BotResponse => ({
-      recipient_id: uuid,
-      buttons: [],
-      text,
-      image: null,
-    })) : [];
-  const [conversation, setConversation] = useState<Message[]>(initialConversation);
+const ChatWindow = ({ config, showWindow, setShowWindow }: ChatWindowProps) => {
+  const { chat } = config;
+  const [{ sender, history }, dispatch] = useConversationState();
 
-  const handleMessage = (text: string) => {
-    const userInput = {
-      sender: uuid,
-      text,
-    };
-    return sendMessage(userInput).then((response: BotResponse[]) => {
-      if (response.length > 0 && response[0].recipient_id) {
-        setUuid(response[0].recipient_id);
-      }
-
-      setConversation([
-        ...conversation,
-        userInput,
-        ...response,
-      ]);
+  if (history.length === 0 && chat.defaultGreetings) {
+    dispatch({
+      type: INIT_CONVERSATION,
+      payload: chat.defaultGreetings.map((text: string): BotResponse => ({
+        recipient_id: sender,
+        buttons: [],
+        text,
+        image: null,
+      }))
     })
-      .catch((error: any) => {
-        // TODO: Display an error message to the user
-        console.error(error);
-      });
-  };
+  }
 
   return (<div className={`bubble-container ${showWindow ? 'active' : 'inactive'}`}>
     <ChatHeader
@@ -55,8 +37,8 @@ const ChatWindow = ({config, showWindow, setShowWindow}: ChatWindowProps) => {
         setShowWindow(false);
       }}
     />
-    <Conversation conversation={conversation} handleMessage={handleMessage}/>
-    <Input sendMessage={handleMessage}/>
+    <Conversation />
+    <Input />
   </div>)
 };
 
