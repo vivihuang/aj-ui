@@ -373,3 +373,19 @@ body {
   margin: 0;
   transform: scale(0);
 }
+
+.button-group {
+  display: flex;
+  flex-flow: wrap;
+
+  .button {
+    background-color: $text;
+    color: $text-user;
+    padding: 4px 16px;
+    border-radius: 4px;
+    margin-right: 8px;
+    margin-top: 8px;
+    cursor: pointer;
+  }
+
+}

@@ -1,6 +1,6 @@
 interface BotResponseBase {
   recipient_id: string;
-  buttons?: {
+  buttons: {
     title: string;
     payload: string;
   }[];

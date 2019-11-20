@@ -1,10 +1,10 @@
-import { h } from 'preact';
+import {h} from 'preact';
 
 import ChatHeader from './ChatHeader'
 import Conversation from './Conversation'
 import Input from './Input';
-import { useState } from 'preact/hooks';
-import { sendMessage } from '../utils/request';
+import {useState} from 'preact/hooks';
+import {sendMessage} from '../utils/request';
 
 interface ChatWindowProps {
   config: ChatbotConfig;
@@ -12,12 +12,13 @@ interface ChatWindowProps {
   setShowWindow: (show: boolean) => void;
 }
 
-const ChatWindow = ({ config, showWindow, setShowWindow }: ChatWindowProps) => {
+const ChatWindow = ({config, showWindow, setShowWindow}: ChatWindowProps) => {
   const [uuid, setUuid] = useState<string>('');
-  const { chat } = config;
+  const {chat} = config;
   const initialConversation = chat.defaultGreetings
     ? chat.defaultGreetings.map((text: string): BotResponse => ({
       recipient_id: uuid,
+      buttons: [],
       text,
       image: null,
     })) : [];
@@ -29,16 +30,16 @@ const ChatWindow = ({ config, showWindow, setShowWindow }: ChatWindowProps) => {
       text,
     };
     return sendMessage(userInput).then((response: BotResponse[]) => {
-        if (response.length > 0 && response[0].recipient_id) {
-          setUuid(response[0].recipient_id);
-        }
+      if (response.length > 0 && response[0].recipient_id) {
+        setUuid(response[0].recipient_id);
+      }
 
-        setConversation([
-          ...conversation,
-          userInput,
-          ...response,
-        ]);
-      })
+      setConversation([
+        ...conversation,
+        userInput,
+        ...response,
+      ]);
+    })
       .catch((error: any) => {
         // TODO: Display an error message to the user
         console.error(error);
@@ -54,8 +55,8 @@ const ChatWindow = ({ config, showWindow, setShowWindow }: ChatWindowProps) => {
         setShowWindow(false);
       }}
     />
-    <Conversation conversation={conversation} />
-    <Input sendMessage={handleMessage} />
+    <Conversation conversation={conversation}/>
+    <Input sendMessage={handleMessage}/>
   </div>)
 };
 
