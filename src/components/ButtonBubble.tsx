@@ -14,7 +14,7 @@ const ButtonBubble = (props: ButtonBubbleProps) => {
 
   return <div className="button-group">
     {buttons.map((button, index) => {
-      return <div className="button" key={index} onClick={(event) => onClickButton(event, button.title)}>
+      return <div className="button" key={index} onClick={(event) => onClickButton(event, button.payload)}>
         {button.title}
       </div>
     })}
