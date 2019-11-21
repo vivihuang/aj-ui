@@ -1,4 +1,4 @@
-interface Action<T> {
+interface Action<T = any> {
   type: string;
   payload: T;
 }

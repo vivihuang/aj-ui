@@ -14,7 +14,7 @@ interface ChatWindowProps {
 
 const ChatWindow = ({ config, showWindow, setShowWindow }: ChatWindowProps) => {
   const { chat } = config;
-  const [{ sender, history }, dispatch] = useConversationState();
+  const [{ sender = '', history }, dispatch] = useConversationState();
 
   if (history.length === 0 && chat.defaultGreetings) {
     dispatch({

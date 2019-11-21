@@ -3,7 +3,7 @@ import { sendMessage } from '../utils/request';
 import { ADD_CONVERSATION, SET_SENDER } from './constants';
 
 export const handleMessage = (text: string) => {
-  const [{ sender }, dispatch] = useConversationState();
+  const [{ sender = '' }, dispatch] = useConversationState();
   const userInput = {
     sender,
     text,

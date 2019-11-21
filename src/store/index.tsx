@@ -7,15 +7,21 @@ const initialConversationState: Conversation = {
   history: [],
 };
 
-// TODO: remove any: [Conversation, (action: Action<any>) => void]
-export const ConversationContext = createContext<any>(null);
+type ConversationContextProps = [
+  Conversation,
+  ({ type }: Action) => void
+]
+
+export const ConversationContext = createContext<ConversationContextProps>({} as ConversationContextProps);
 
 export const ConversationProvider = ({ children }: { children: any }) => {
+  const value = useReducer(conversationReducer, initialConversationState);
+
   return (
-    <ConversationContext.Provider
-      value={useReducer<Conversation, Action<any>>(conversationReducer, initialConversationState)}>
+    <ConversationContext.Provider value={value}>
       {children}
-    </ConversationContext.Provider>)
+    </ConversationContext.Provider>
+  );
 };
 
 export const useConversationState = () => {
