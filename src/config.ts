@@ -8,7 +8,7 @@ const CONFIG: ChatbotConfig = {
   },
   engine: {
     host: '',
-    endpoint: '/api/message',
+    endpoint: '/api/message/rasa',
   },
 };
 
