@@ -1,4 +1,4 @@
-import { h, createContext } from 'preact';
+import { h, createContext, VNode } from 'preact';
 import { useContext, useReducer } from 'preact/hooks';
 import { conversationReducer } from './reducer';
 
@@ -14,7 +14,7 @@ type ConversationContextProps = [
 
 export const ConversationContext = createContext<ConversationContextProps>({} as ConversationContextProps);
 
-export const ConversationProvider = ({ children }: { children: any }) => {
+export const ConversationProvider = ({ children }: { children: VNode }) => {
   const value = useReducer(conversationReducer, initialConversationState);
 
   return (
