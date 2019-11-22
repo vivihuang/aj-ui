@@ -1,5 +1,4 @@
 import { Component, h } from 'preact';
-import CONFIG from '../config';
 import { PropRef, useRef } from 'preact/hooks';
 import { handleMessage } from '../store/actions';
 
@@ -7,10 +6,14 @@ interface InputState {
   disabled: boolean;
 }
 
-class Input extends Component<any, InputState> {
+interface InputProps {
+  config: ChatbotConfig;
+}
+
+class Input extends Component<InputProps, InputState> {
   textarea: PropRef<HTMLTextAreaElement>;
 
-  constructor(props: any) {
+  constructor(props: InputProps) {
     super(props);
     this.textarea = useRef();
   }
@@ -32,7 +35,7 @@ class Input extends Component<any, InputState> {
       }
       this.setState({ disabled: true, });
 
-      handleMessage(value).then(() => {
+      handleMessage(value, this.props.config).then(() => {
         this.setState({ disabled: false, });
         if (this.textarea.current) {
           this.textarea.current.value = '';
@@ -48,7 +51,7 @@ class Input extends Component<any, InputState> {
     }
   };
 
-  render(_: any, { disabled }: InputState) {
+  render({ config }: InputProps, { disabled }: InputState) {
     if (this.textarea.current) {
       this.textarea.current.focus();
     }
@@ -56,7 +59,7 @@ class Input extends Component<any, InputState> {
       <textarea
         ref={this.textarea}
         disabled={disabled}
-        placeholder={CONFIG.chat.defaultPlaceholder}
+        placeholder={config.chat.defaultPlaceholder}
         onKeyUp={this.onKeyUp}
         onKeyDown={this.onKeyDown} />
     </div>);

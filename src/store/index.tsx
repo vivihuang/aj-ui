@@ -1,6 +1,7 @@
 import { h, createContext, VNode } from 'preact';
 import { useContext, useReducer } from 'preact/hooks';
 import { conversationReducer } from './reducer';
+import { CONFIG_RASA } from '../config';
 
 const initialConversationState: Conversation = {
   sender: '',
@@ -27,3 +28,5 @@ export const ConversationProvider = ({ children }: { children: VNode }) => {
 export const useConversationState = () => {
   return useContext(ConversationContext);
 };
+
+export const AppConfig = createContext<ChatbotConfig>(CONFIG_RASA);

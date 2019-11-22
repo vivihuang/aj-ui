@@ -3,18 +3,24 @@ import { h } from 'preact';
 import ChatWindow from './components/ChatWindow';
 import Switcher from './components/Switcher';
 import { useState } from 'preact/hooks';
-import { ConversationProvider } from './store';
+import { AppConfig, ConversationProvider } from './store';
 
-const Chatbot = ({ config }: { config: ChatbotConfig}) => {
+const Chatbot = () => {
   const [showWindow, setShowWindow] = useState(false);
-  return (<ConversationProvider>
-    <div>
-      <ChatWindow config={config} showWindow={showWindow} setShowWindow={setShowWindow} />
-      <Switcher text={config.chat.buttonText} onClick={() => {
-        setShowWindow(!showWindow);
-      }} />
-    </div>
-  </ConversationProvider>);
+  return (<AppConfig.Consumer>
+    {
+      (config: ChatbotConfig) => (
+        <ConversationProvider>
+          <div className={`chatbot-placement-${config.chat.placement}`}>
+            <ChatWindow config={config} showWindow={showWindow} setShowWindow={setShowWindow} />
+            <Switcher text={config.chat.buttonText} onClick={() => {
+              setShowWindow(!showWindow);
+            }} />
+          </div>
+        </ConversationProvider>
+      )
+    }
+  </AppConfig.Consumer>);
 };
 
 export default Chatbot;

@@ -38,7 +38,7 @@ const ChatWindow = ({ config, showWindow, setShowWindow }: ChatWindowProps) => {
       }}
     />
     <Conversation />
-    <Input />
+    <Input config={config} />
   </div>)
 };
 

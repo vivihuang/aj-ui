@@ -1,6 +1,6 @@
-import config from '../config';
+import { CONFIG_RASA } from '../config';
 
-export const sendMessage = (message: UserInput): Promise<BotResponse[]> => {
+export const sendMessage = (message: UserInput, config: ChatbotConfig = CONFIG_RASA): Promise<BotResponse[]> => {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     xhr.open('POST', `${config.engine.host}${config.engine.endpoint}`, true);

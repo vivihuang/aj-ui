@@ -127,6 +127,17 @@ body {
   }
 }
 
+.chatbot-placement-bottomLeft {
+  .chat-button {
+    right: unset;
+    left: -1px;
+    border-radius: 0 24px 24px 0;
+  }
+  .bubble-container {
+    right: unset;
+    left: 10px;
+  }
+}
 
 .bubble,
 .bubble-typing {
@@ -387,5 +398,21 @@ body {
     margin-top: 8px;
     cursor: pointer;
   }
+}
 
+.switch-engine-button {
+  box-shadow: none;
+  border: none;
+  background: #0074D9;
+  color: white;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  &:focus, &:active, &:hover {
+    outline: none;
+  }
+  &:hover {
+    opacity: .9;
+  }
 }
